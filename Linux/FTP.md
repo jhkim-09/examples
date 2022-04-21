@@ -1,6 +1,6 @@
 # FTP 서버 구성 예제
 
-## 0. FTP 서버 구성 
+## 1. FTP 서버 구성 
 ### 1) 패키지 설치
 ```bash
 [root@ftp.nobreak.server.com ~]# dnf -y install vsftpd
@@ -65,7 +65,7 @@ success
 success
 ```
 
-## 1. FTP 클라이언트 연결
+## 2. FTP 클라이언트 연결
 ### 1) 패키지 설치
 ```bash
 [root@ftp.nobreak.client.com ~]# dnf -y install lftp
