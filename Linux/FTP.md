@@ -35,7 +35,7 @@ local_root=public_html
 use_localtime=YES
 # turn off for seccomp filter (if cannot login, add this line)
 seccomp_sandbox=NO
-
+```
 ### 3) 유저 생성 및 설정
 testuser 생성
 ```bash
