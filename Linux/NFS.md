@@ -9,6 +9,7 @@
 
 ### 2) 설정파일 생성 및 변경
 domain 설정
+필수 설정은 아님
 ```bash
 [root@nfs.server.com ~]# vi /etc/idmapd.conf
 # line 5 : uncomment and change to your domain name
@@ -16,6 +17,7 @@ Domain = server.com
 ```
 
 내보내기(export) 설정
+no_root_squash는 필수 설정 아님, 클라이언트의 root와 서버의 root를 일치시키는 옵션
 ```bash
 [root@nfs.server.com ~]# vi /etc/exports
 # create new
@@ -31,7 +33,7 @@ Domain = server.com
 
 ### 4) 서비스 설정
 ```bash
-[root@nfs.server.com ~]# systemctl enable --now rpcbind nfs-server
+[root@nfs.server.com ~]# systemctl enable --now nfs-server
 ```
 
 ### 5) 방화벽 설정
@@ -43,7 +45,7 @@ success
 ```
 NFSv3 사용 시 설정
 ```bash
-[root@nfs.server.com ~]# firewall-cmd --add-service={nfs3,mountd,rpc-bind} --permanent
+[root@nfs.server.com ~]# firewall-cmd --add-service={nfs3,mountd} --permanent
 success
 [root@nfs.server.com ~]# firewall-cmd --reload
 success
@@ -58,6 +60,7 @@ success
 
 ### 2) 설정파일 변경
 domain 변경
+필수 설정은 아님
 ```bash
 [root@nfs.client.com ~]# vi /etc/idmapd.conf
 # line 5 : uncomment and change to your domain name
@@ -138,11 +141,11 @@ nfs   -fstype=nfs,rw  nfs.server.com:/home/nfsshare
 ### 3) 서비스 설정
 [root@nfs.client.com ~]# systemctl enable --now autofs
 
-### 4) mount point에서 작업하기
+### 4) mount 확인 및 작업
 server의 디렉토리와 mount한 디렉토리에서 작업
 ```bash
-[root@nfs.client.com ~]# cd /mnt
-[root@nfs.client.com mnt]# ll
+[root@nfs.client.com ~]# cd /mnt/nfs
+[root@nfs.client.com nfs]# ll
 total 8
 -rw-r--r--. 1 root root 10 Mar  3 19:14 testfile.txt
 -rw-r--r--. 1 root root  5 Mar  3 19:17 test.txt
